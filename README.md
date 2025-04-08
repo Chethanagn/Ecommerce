@@ -85,7 +85,7 @@ $  source venv/bin/activate
 
 **3. Clone this project**
 ```
-$  git clone https://github.com/vijaythapa333/simple-multivendor-site.git
+$  git clone https://github.com/Chethanagn/Ecommerce.git
 ```
 
 Then, Enter the project
