@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Add Product{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8 is-offset-2">
+                <div class="box">
+                    <h1 class="title">Add Product</h1>
+
+                    <form method="post" action="" enctype="multipart/form-data" class="mt-6">
+                        {% csrf_token %}
+
+                        <div class="field">
+                            <label class="label">Product Title</label>
+                            <div class="control">
+                                <input type="text" name="title" class="input" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Description</label>
+                            <div class="control">
+                                <textarea name="description" class="textarea" required rows="5"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Price</label>
+                            <div class="control">
+                                <input type="number" name="price" class="input" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Category</label>
+                            <div class="control">
+                                <div class="select">
+                                    <select name="category" required>
+                                        <option value="">Select a category</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}">{{ category.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Image</label>
+                            <div class="control">
+                                <div class="file has-name">
+                                    <label class="file-label">
+                                        <input type="file" name="image" class="file-input" required>
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-upload"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Choose a file…
+                                            </span>
+                                        </span>
+                                        <span class="file-name">
+                                            Selected file name will appear here
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-dark is-uppercase">Add Product</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.querySelector('input[type="file"]');
+    const fileName = document.querySelector('.file-name');
+    
+    fileInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            fileName.textContent = this.files[0].name;
+        } else {
+            fileName.textContent = 'Selected file name will appear here';
+        }
+    });
+});
+</script>
+{% endblock scripts %}
